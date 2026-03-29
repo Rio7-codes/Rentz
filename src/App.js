@@ -1,24 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+
+import Sidebar from "./components/Sidebar";
+import TopBar from "./components/TopBar";
+
+import Dashboard from "./pages/Dashboard";
+import Downloading from "./pages/Downloading";
+import Completed from "./pages/Completed";
+import Settings from "./pages/Settings";
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
 
 function App() {
+
+  useEffect(() => {
+    const navEntries = window.performance.getEntriesByType("navigation");
+    if (navEntries.length > 0 && navEntries[0].type === "reload") {
+      if (window.location.pathname !== "/") {
+        window.location.href = "/";
+      }
+    }
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Router>
+      <div style={{ background: "#111", color: "#fff" }}>
+
+        <Sidebar />
+
+        <div
+          style={{
+            marginLeft: "240px",
+            minHeight: "100vh",
+            display: "flex",
+            flexDirection: "column"
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <TopBar />
+
+          <div style={{ padding: "30px 40px", flex: 1 }}>
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/downloading" element={<Downloading />} />
+              <Route path="/completed" element={<Completed />} />
+              <Route path="/settings" element={<Settings />} />
+            </Routes>
+          </div>
+        </div>
+
+      </div>
+    </Router>
   );
 }
 

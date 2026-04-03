@@ -1,4 +1,4 @@
-# Rentz 🚀
+# RENTZ
 
 **Modern BitTorrent Client (Frontend + Backend Ready)**
 

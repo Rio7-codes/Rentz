@@ -3,51 +3,70 @@ import React from "react";
 function StatsCard({ title, value, color }) {
   return (
     <div
-      onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-2px)")}
-      onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0px)")}
       style={{
-        background: "#161616",
-        border: "1px solid #222",
-        borderRadius: "10px",
-        padding: "22px",
-        boxShadow: "0 2px 6px rgba(0,0,0,0.4)",
-        transition: "transform 0.15s ease",
-        position: "relative"
+        position: "relative",
+        overflow: "hidden",
+        background:
+          "linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.02))",
+        border: "1px solid rgba(255,255,255,0.07)",
+        borderRadius: "22px",
+        padding: "24px",
+        minHeight: "138px",
+        boxShadow: "0 12px 30px rgba(0,0,0,0.20)",
+        transition: "all 0.25s ease",
       }}
     >
-      {/* Accent line */}
       <div
         style={{
           position: "absolute",
-          top: "0",
-          left: "0",
-          width: "4px",
-          height: "100%",
-          background: color || "#00ff9c",
-          borderTopLeftRadius: "10px",
-          borderBottomLeftRadius: "10px"
+          top: "-30px",
+          right: "-20px",
+          width: "120px",
+          height: "120px",
+          background: `radial-gradient(circle, ${color}22 0%, transparent 70%)`,
+          pointerEvents: "none",
         }}
       />
 
       <div
         style={{
-          fontSize: "13px",
-          color: "#888",
-          marginBottom: "8px",
-          letterSpacing: "0.3px"
+          position: "absolute",
+          top: "18px",
+          left: "18px",
+          width: "10px",
+          height: "10px",
+          borderRadius: "999px",
+          background: color,
+          boxShadow: `0 0 14px ${color}66`,
         }}
-      >
-        {title}
-      </div>
+      />
 
-      <div
-        style={{
-          fontSize: "26px",
-          fontWeight: "600",
-          color: color || "#00ff9c"
-        }}
-      >
-        {value}
+      <div style={{ position: "relative", zIndex: 1 }}>
+        <div
+          style={{
+            fontSize: "14px",
+            color: "rgba(255,255,255,0.52)",
+            fontWeight: "500",
+            marginBottom: "18px",
+            paddingLeft: "18px",
+            letterSpacing: "0.01em",
+          }}
+        >
+          {title}
+        </div>
+
+        <div
+          style={{
+            fontSize: "24px",
+            fontWeight: "800",
+            color: color,
+            lineHeight: 1,
+            letterSpacing: "-0.6px",
+            paddingLeft: "18px",
+          }}
+        >
+          {value}
+        </div>
       </div>
     </div>
   );

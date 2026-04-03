@@ -6,7 +6,6 @@ import TopBar from "./components/TopBar";
 import Dashboard from "./pages/Dashboard";
 import Downloading from "./pages/Downloading";
 import Completed from "./pages/Completed";
-import Settings from "./pages/Settings";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
@@ -43,7 +42,6 @@ function App() {
               <Route path="/" element={<Dashboard />} />
               <Route path="/downloading" element={<Downloading />} />
               <Route path="/completed" element={<Completed />} />
-              <Route path="/settings" element={<Settings />} />
             </Routes>
           </div>
         </div>

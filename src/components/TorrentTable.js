@@ -1,138 +1,305 @@
 import React from "react";
 
-const torrents = [
-  {
-    name: "ubuntu-22.04.iso",
-    size: "3.4 GB",
-    progress: 42,
-    peers: 18,
-    speed: "1.2 MB/s",
-    status: "Downloading"
-  },
-  {
-    name: "movie-1080p.mkv",
-    size: "2.1 GB",
-    progress: 67,
-    peers: 12,
-    speed: "850 KB/s",
-    status: "Downloading"
-  },
-  {
-    name: "linux-distro.zip",
-    size: "800 MB",
-    progress: 100,
-    peers: 0,
-    speed: "0",
-    status: "Completed"
-  }
-];
-
 function TorrentTable({ torrents, onSelect }) {
   return (
     <div
       style={{
-        background: "#161616",
-        borderRadius: "10px",
-        border: "1px solid #222",
-        overflow: "hidden"
+        background: "linear-gradient(180deg, #171717 0%, #121212 100%)",
+        border: "1px solid rgba(255,255,255,0.08)",
+        borderRadius: "22px",
+        overflow: "hidden",
+        boxShadow: "0 20px 45px rgba(0,0,0,0.22)",
       }}
     >
-      <table
+      <div
         style={{
-          width: "100%",
-          borderCollapse: "collapse"
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "18px 22px",
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
+          background:
+            "linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))",
         }}
       >
-        {/* Header */}
-        <thead
+        <div>
+          <div
+            style={{
+              fontSize: "15px",
+              fontWeight: "700",
+              color: "#f5f7fb",
+              marginBottom: "4px",
+            }}
+          >
+            Active Transfers
+          </div>
+          <div
+            style={{
+              fontSize: "12px",
+              color: "rgba(255,255,255,0.48)",
+              letterSpacing: "0.04em",
+            }}
+          >
+            Click a row to inspect torrent details
+          </div>
+        </div>
+
+        <div
           style={{
-            background: "#1c1c1c",
-            textAlign: "left",
-            fontSize: "13px",
-            color: "#aaa",
-            borderBottom: "1px solid #222"
+            padding: "7px 12px",
+            borderRadius: "999px",
+            background: "rgba(34,245,154,0.08)",
+            border: "1px solid rgba(34,245,154,0.14)",
+            color: "#2af598",
+            fontSize: "12px",
+            fontWeight: "700",
           }}
         >
-          <tr>
-            <th style={{ padding: "14px 16px" }}>Name</th>
-            <th>Size</th>
-            <th>Progress</th>
-            <th>Peers</th>
-            <th>Speed</th>
-            <th>Status</th>
-          </tr>
-        </thead>
+          {torrents.length} Active
+        </div>
+      </div>
 
-        {/* Rows */}
-        <tbody>
-          {torrents.map((torrent, i) => (
+      <div style={{ overflowX: "auto" }}>
+        <table
+          style={{
+            width: "100%",
+            borderCollapse: "collapse",
+            minWidth: "860px",
+          }}
+        >
+          <thead>
             <tr
-              key={i}
-              onClick={() => onSelect && onSelect(torrent)}
-              onMouseEnter={(e) => (e.currentTarget.style.background = "#1f1f1f")}
-              onMouseLeave={(e) => (e.currentTarget.style.background = "")}
               style={{
-                borderTop: "1px solid #222",
-                fontSize: "14px",
-                cursor: "pointer",
-                transition: "background 0.15s ease"
+                background: "rgba(255,255,255,0.02)",
               }}
             >
-              <td style={{ padding: "14px 16px", color: "#ddd" }}>
-                {torrent.name}
-              </td>
+              {["Name", "Size", "Progress", "Peers", "Speed", "Status"].map(
+                (head) => (
+                  <th
+                    key={head}
+                    style={{
+                      textAlign: "left",
+                      padding: "16px 22px",
+                      fontSize: "12px",
+                      fontWeight: "700",
+                      color: "rgba(255,255,255,0.44)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.08em",
+                      borderBottom: "1px solid rgba(255,255,255,0.06)",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {head}
+                  </th>
+                )
+              )}
+            </tr>
+          </thead>
 
-              <td style={{ color: "#aaa" }}>{torrent.size}</td>
-
-              {/* Progress */}
-              <td style={{ width: "220px" }}>
-                <div
+          <tbody>
+            {torrents.map((torrent, index) => (
+              <tr
+                key={index}
+                onClick={() => onSelect(torrent)}
+                style={{
+                  cursor: "pointer",
+                  borderBottom:
+                    index !== torrents.length - 1
+                      ? "1px solid rgba(255,255,255,0.05)"
+                      : "none",
+                  background:
+                    index % 2 === 0
+                      ? "rgba(255,255,255,0.015)"
+                      : "transparent",
+                  transition: "all 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background =
+                    "rgba(255,255,255,0.04)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background =
+                    index % 2 === 0
+                      ? "rgba(255,255,255,0.015)"
+                      : "transparent";
+                }}
+              >
+                <td
                   style={{
-                    background: "#2a2a2a",
-                    height: "8px",
-                    borderRadius: "6px",
-                    overflow: "hidden",
-                    marginBottom: "4px"
+                    padding: "18px 22px",
+                    color: "#f5f7fb",
+                    fontSize: "14px",
+                    fontWeight: "600",
+                    maxWidth: "280px",
                   }}
                 >
                   <div
                     style={{
-                      width: `${torrent.progress}%`,
-                      background: "#00ff9c",
-                      height: "100%",
-                      transition: "width 0.3s ease"
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "12px",
                     }}
-                  />
-                </div>
+                  >
+                    <div
+                      style={{
+                        width: "10px",
+                        height: "10px",
+                        borderRadius: "999px",
+                        background: "#2af598",
+                        boxShadow: "0 0 12px rgba(42,245,152,0.55)",
+                        flexShrink: 0,
+                      }}
+                    />
+                    <span
+                      style={{
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap",
+                        display: "block",
+                      }}
+                    >
+                      {torrent.name}
+                    </span>
+                  </div>
+                </td>
 
-                <span style={{ fontSize: "12px", color: "#aaa" }}>
-                  {torrent.progress}%
-                </span>
-              </td>
-
-              <td style={{ color: "#ccc" }}>{torrent.peers}</td>
-
-              <td style={{ color: "#3498db" }}>{torrent.speed}</td>
-
-              <td>
-                <span
+                <td
                   style={{
-                    background:
-                      torrent.status === "Completed"
-                        ? "#1f7a4f"
-                        : "#2c3e50",
-                    padding: "4px 10px",
-                    borderRadius: "6px",
-                    fontSize: "12px"
+                    padding: "18px 22px",
+                    color: "rgba(255,255,255,0.72)",
+                    fontSize: "14px",
+                    fontWeight: "500",
+                    whiteSpace: "nowrap",
                   }}
                 >
-                  {torrent.status}
-                </span>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                  {torrent.size}
+                </td>
+
+                <td
+                  style={{
+                    padding: "18px 22px",
+                    minWidth: "210px",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "8px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        height: "8px",
+                        width: "100%",
+                        background: "rgba(255,255,255,0.08)",
+                        borderRadius: "999px",
+                        overflow: "hidden",
+                        position: "relative",
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: `${torrent.progress}%`,
+                          height: "100%",
+                          borderRadius: "999px",
+                          background:
+                            "linear-gradient(90deg, #22f59a 0%, #14d7a0 55%, #3ea6ff 100%)",
+                          boxShadow: "0 0 14px rgba(34,245,154,0.22)",
+                          transition: "width 0.3s ease",
+                        }}
+                      />
+                    </div>
+
+                    <span
+                      style={{
+                        fontSize: "12px",
+                        fontWeight: "700",
+                        color: "#7dffca",
+                        letterSpacing: "0.02em",
+                      }}
+                    >
+                      {torrent.progress}%
+                    </span>
+                  </div>
+                </td>
+
+                <td
+                  style={{
+                    padding: "18px 22px",
+                    color: "#ffd24d",
+                    fontSize: "14px",
+                    fontWeight: "700",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {torrent.peers}
+                </td>
+
+                <td
+                  style={{
+                    padding: "18px 22px",
+                    color: "#4db3ff",
+                    fontSize: "14px",
+                    fontWeight: "700",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {torrent.speed}
+                </td>
+
+                <td
+                  style={{
+                    padding: "18px 22px",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  <span
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "8px",
+                      padding: "7px 12px",
+                      borderRadius: "999px",
+                      background:
+                        torrent.status === "Completed"
+                          ? "rgba(62,166,255,0.10)"
+                          : "rgba(34,245,154,0.08)",
+                      border:
+                        torrent.status === "Completed"
+                          ? "1px solid rgba(62,166,255,0.18)"
+                          : "1px solid rgba(34,245,154,0.14)",
+                      color:
+                        torrent.status === "Completed"
+                          ? "#66bfff"
+                          : "#2af598",
+                      fontSize: "12px",
+                      fontWeight: "700",
+                    }}
+                  >
+                    <span
+                      style={{
+                        width: "7px",
+                        height: "7px",
+                        borderRadius: "999px",
+                        background:
+                          torrent.status === "Completed"
+                            ? "#66bfff"
+                            : "#2af598",
+                        boxShadow:
+                          torrent.status === "Completed"
+                            ? "0 0 10px rgba(62,166,255,0.45)"
+                            : "0 0 10px rgba(34,245,154,0.45)",
+                      }}
+                    />
+                    {torrent.status}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

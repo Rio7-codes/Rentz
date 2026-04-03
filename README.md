@@ -1,34 +1,42 @@
 # Rentz 🚀
 
-*Work in progress… because great things take time (and a lot of `console.log`s).*
+**Modern BitTorrent Client (Frontend + Backend Ready)**
 
-Rentz is a modern React-based frontend for a decentralized file sharing platform.
-Right now, it’s focused on building a clean, scalable UI — the heavy backend magic is still cooking 👨‍🍳
-
----
-
-## 🧩 Current Status
-
-⚠️ This project is actively under development
-Expect changes, experiments, and the occasional chaos
+Rentz is a minimal and scalable BitTorrent client built with a React frontend and a backend system (in development).
+Both frontend and backend components are developed — the current focus is on integrating them into a fully functional system.
 
 ---
 
-## 👀 Where’s the code?
+## 🚧 Status
 
-Most of the interesting stuff lives inside:
+⚠️ Project nearing integration phase
+Frontend and backend are complete individually and will be connected soon.
+
+---
+
+## ✨ Current Features
+
+* 🧭 Clean and modern sidebar navigation
+* 📥 Download management UI (Downloading / Completed)
+* 🔗 Magnet link / torrent URL input
+* 👤 Basic login system (local storage)
+* 🎯 Minimal and responsive UI
+
+---
+
+## 🧩 Project Structure
 
 ```bash
 src/
+ ├── components/      
+ ├── pages/           
+ ├── assets/          
+ ├── layout/          
 ```
-
-Dive into the subfolders — that’s where components, layouts, and logic are hanging out.
 
 ---
 
-## ⚙️ Running the project
-
-Clone it, install it, run it — the usual drill:
+## ⚙️ Running the Project
 
 ```bash
 git clone https://github.com/Rio7-codes/Rentz.git
@@ -37,9 +45,9 @@ npm install
 npm start
 ```
 
-Then open:
+Open:
 
-```bash
+```
 http://localhost:3000
 ```
 
@@ -47,28 +55,28 @@ http://localhost:3000
 
 ## 🛠️ Tech Stack
 
-* React
-* JavaScript
-* HTML & CSS
+* **Frontend:** React, JavaScript, HTML, CSS
+* **Backend:** *(Integration in progress)*
 
 ---
 
-## 📌 What’s coming next?
+## 🔮 Upcoming Work
 
-* Backend integration
-* Real file sharing logic
-* Performance improvements
-* Probably fewer bugs (hopefully)
+* 🔗 Frontend–backend integration
+* 📡 Real torrent handling logic
+* 📊 Download progress tracking
+* 💾 Persistent user data storage
+* ⚡ Performance optimizations
 
 ---
 
 ## 🤝 Contributing
 
-Not open for contributions yet — still building the foundation.
-But feel free to explore, fork, and break things 😄
+Not open for contributions yet — still finalizing core integration.
+Feel free to explore and fork.
 
 ---
 
-## ⭐ Final note
+## ⭐ Note
 
-If you stumbled here early — congrats, you’re watching Rentz grow from scratch.
+This project is transitioning from development to integration — moving towards a fully functional BitTorrent client.
